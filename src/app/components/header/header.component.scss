@@ -6,21 +6,40 @@
   }
 
   .avatar {
-    width: 40px;
-    height: 40px;
-    margin: 10px 10px;
+    width: 36px;
+    height: 36px;
+    margin: 8px 14px;
     border-radius: 50%;
     background-color: #CDCDCD;
     cursor: pointer;
     text-align: center;
 
     .initials {
-      line-height: 40px;
-      font-size: 20px;
+      line-height: 36px;
+      font-size: 18px;
     }
 
     &::after {
       display: none !important;
     }
+  }
+
+  .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+  }
+
+  .form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+  }
+
+  .form-control-dark:focus {
+    color: inherit;
+    background-color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
   }
 }

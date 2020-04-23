@@ -25,7 +25,8 @@ export class AuthService {
     //   this.logout();
     // }
     // return !isTokenExpired;
-    return true;
+
+    return !!sessionStorage.getItem('email');
   }
 
   login(user: User) {
@@ -34,6 +35,7 @@ export class AuthService {
 
   logout() {
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('email');
     this.router.navigate(['/login']);
   }
 

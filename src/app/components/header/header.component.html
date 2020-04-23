@@ -1,7 +1,8 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Stock Market Charting System</a>
+  <input *ngIf="isAuthenticated" class="form-control form-control-dark col-sm-3 ml-auto" type="text" placeholder="Search" aria-label="Search">
 
-  <div ngbDropdown display="dynamic" placement="bottom-right" class="float-right">
+  <div *ngIf="isAuthenticated" ngbDropdown display="dynamic" placement="bottom-right" class="float-right">
     <div class="avatar" ngbDropdownToggle>
       <span class="initials">CZ</span>
     </div>

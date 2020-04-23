@@ -18,6 +18,7 @@ export type MenuDropDown = {
 export class HeaderComponent implements OnInit {
 
   dropDownItems: MenuDropDown[];
+  isAuthenticated: boolean;
   isInAdminView: boolean;
 
   constructor(
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit {
   ) {
     const url = this.router.url;
     this.isInAdminView = url.indexOf('admin/') > -1;
+    this.isAuthenticated = this.authService.isAuthenticated();
 
     this.authService.getUser().then((user: User) => {
       const isAdmin = user.role === 'admin';
