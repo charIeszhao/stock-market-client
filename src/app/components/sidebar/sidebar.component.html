@@ -1,6 +1,6 @@
 <div class="sidebar-sticky">
   <ul class="nav flex-column">
-    <ng-container *ngIf="isAdmin | async; else userNav">
+    <ng-container *ngIf="isInAdminView; else userNav">
       <li class="nav-item" *ngFor="let menu of adminMenus" (click)="onNavClick(menu, adminMenus)">
         <a [ngClass]="{'nav-link': true, 'active': menu.isActive}" [routerLink]="menu.routerLink">
           {{menu.label}}

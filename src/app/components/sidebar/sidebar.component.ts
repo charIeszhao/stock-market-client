@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { User } from '../../core/auth/user';
+import { Router } from '@angular/router';
 
 export interface NavItem {
   label: string;
@@ -15,18 +16,16 @@ export interface NavItem {
 })
 export class SidebarComponent implements OnInit {
 
-  isAdmin: Promise<boolean>|null = null;
-  resolveUserRole: (isAdmin: boolean) => void|null = null;
-
+  isInAdminView: boolean;
   adminMenus: NavItem[];
   userMenus: NavItem[];
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
-    this.isAdmin = new Promise<boolean>(resolve => {
-      this.resolveUserRole = resolve;
-    });
+    const url = this.router.url;
+    this.isInAdminView = url.indexOf('admin/') > -1;
 
     this.adminMenus = [
       { label: 'Data Import', routerLink: '/admin/import', isActive: true},
@@ -43,9 +42,6 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getUser().then((user: User) => {
-      this.resolveUserRole(user.role === 'admin');
-    });
   }
 
   onNavClick(item: NavItem, menus: NavItem[]): void {
