@@ -1,0 +1,19 @@
+<div class="sidebar-sticky">
+  <ul class="nav flex-column">
+    <ng-container *ngIf="isAdmin | async; else userNav">
+      <li class="nav-item" *ngFor="let menu of adminMenus" (click)="onNavClick(menu, adminMenus)">
+        <a [ngClass]="{'nav-link': true, 'active': menu.isActive}" [routerLink]="menu.routerLink">
+          {{menu.label}}
+        </a>
+      </li>
+    </ng-container>
+
+    <ng-template #userNav>
+      <li class="nav-item" *ngFor="let menu of userMenus" (click)="onNavClick(menu, userMenus)">
+        <a [ngClass]="{'nav-link': true, 'active': menu.isActive}" [routerLink]="menu.routerLink">
+          {{menu.label}}
+        </a>
+      </li>
+    </ng-template>
+  </ul>
+</div>

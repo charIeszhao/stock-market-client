@@ -1,0 +1,39 @@
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 50px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.nav-link.active {
+  color: #007bff;
+}
+
+.nav-link:hover .feather,
+.nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}

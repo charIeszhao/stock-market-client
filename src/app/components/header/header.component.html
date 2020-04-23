@@ -1,0 +1,12 @@
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Stock Market Charting System</a>
+
+  <div ngbDropdown display="dynamic" placement="bottom-right" class="float-right">
+    <div class="avatar" ngbDropdownToggle>
+      <span class="initials">CZ</span>
+    </div>
+    <div ngbDropdownMenu>
+      <button ngbDropdownItem *ngFor="let item of dropDownItems" (click)="onMenuClick(item)">{{item.label}}</button>
+    </div>
+  </div>
+</nav>
