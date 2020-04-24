@@ -2,6 +2,7 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Company, CompanyService, ResponseData, State } from '../../services/company.service';
 import { SortableDirective, SortColumn, SortDirection, SortEvent } from '../../directives/sortable.directive';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-company-management',
@@ -28,7 +29,8 @@ export class CompanyManagementComponent implements OnInit {
   };
 
   constructor(
-    private service: CompanyService
+    private service: CompanyService,
+    private modalService: NgbModal
   ) {
     this.getData();
   }
@@ -78,5 +80,11 @@ export class CompanyManagementComponent implements OnInit {
 
   onDelete(companyId: number): void {
     this.companies = this.companies.filter(company => company.id !== companyId);
+  }
+
+  raiseModal(content) {
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+    });
   }
 }
