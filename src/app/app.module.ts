@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TokenInterceptor } from './core/auth/token.interceptor';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -13,17 +15,16 @@ import { DataImportComponent } from './components/data-import/data-import.compon
 import { CompanyManagementComponent } from './components/company-management/company-management.component';
 import { ExchangeManagementComponent } from './components/exchange-management/exchange-management.component';
 import { IpoUpdateComponent } from './components/ipo-update/ipo-update.component';
-
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TokenInterceptor } from './core/auth/token.interceptor';
 import { LoginLayoutComponent } from './layout/login-layout/login-layout.component';
 import { HomeLayoutComponent } from './layout/home-layout/home-layout.component';
-import { CoreModule } from './core/core.module';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { IpoCalendarComponent } from './components/ipo-calendar/ipo-calendar.component';
 import { CompareChartsComponent } from './components/compare-charts/compare-charts.component';
+
+import { SortableDirective } from './directives/sortable.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CompareChartsComponent } from './components/compare-charts/compare-char
     ForgotPasswordComponent,
     DashboardComponent,
     IpoCalendarComponent,
-    CompareChartsComponent
+    CompareChartsComponent,
+    SortableDirective
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,9 @@ import { CompareChartsComponent } from './components/compare-charts/compare-char
     CoreModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [
     {

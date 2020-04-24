@@ -35,9 +35,9 @@ export class HeaderComponent implements OnInit {
       this.dropDownItems = [
         {label: 'Edit Profile', routerLink: '/'},
         {label: 'Preferences', routerLink: '/'},
-        isAdmin ? {label: `Go to ${this.isInAdminView ? 'User' : 'Admin'} View`, fn: this.toggleUserViews} : undefined,
+        ... isAdmin ? [{label: `Go to ${this.isInAdminView ? 'User' : 'Admin'} View`, fn: this.toggleUserViews}] : [],
         {label: 'Logout', fn: this.logout}
-      ].filter(item => item !== undefined);
+      ];
     });
   }
 

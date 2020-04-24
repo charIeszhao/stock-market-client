@@ -1,1 +1,21 @@
-<p>data-import works!</p>
+<h4>Import Excel</h4>
+<p class="mt-3">Select excel file to upload</p>
+<form [formGroup]="formImport">
+  <div class="input-group mb-3">
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" id="importFile" formControlName="importFile" (change)="onFileChange($event.target.files)">
+      <label #labelImport class="custom-file-label" for="importFile">Choose file</label>
+    </div>
+    <div class="input-group-append">
+      <button class="btn btn-outline-primary" type="button" (click)="import()">Upload</button>
+    </div>
+  </div>
+</form>
+<div *ngIf="!isUploaded" class="sample-download-link">
+  <a href="https://github.com/vskreddy652/Genc_BatchB/blob/master/StockExchange_CaseStudy/sample_stock_data.xlsx">
+    Click here to download sample Excel file
+  </a>
+</div>
+<div *ngIf="isUploaded" class="import-success-info">
+  Data imported successfully!
+</div>
