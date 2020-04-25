@@ -39,9 +39,16 @@ export class SidebarComponent implements OnInit {
       { label: 'IPO Calendar', routerLink: '/ipo-calendar', isActive: false},
       { label: 'Comparison Charts', routerLink: '/compare', isActive: false}
     ];
+
+    this.setActiveMenuItem(url);
   }
 
   ngOnInit(): void {
+  }
+
+  setActiveMenuItem(currentUrl: string): void {
+    const menuItems = this.isInAdminView ? this.adminMenus : this.userMenus;
+    menuItems.map(item => { item.isActive = item.routerLink === currentUrl; });
   }
 
   onNavClick(item: NavItem, menus: NavItem[]): void {
