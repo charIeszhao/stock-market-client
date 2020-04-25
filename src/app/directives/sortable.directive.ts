@@ -1,5 +1,5 @@
-import {Directive, EventEmitter, Input, Output} from '@angular/core';
-import { Company } from '../components/company-management/company-management.component';
+import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Company } from '../services/company.service';
 
 export type SortColumn = keyof Company | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -11,23 +11,20 @@ export interface SortEvent {
 }
 
 @Directive({
-  selector: 'th[sortable]',
-  host: {
-    '[class.asc]': 'direction === "asc"',
-    '[class.desc]': 'direction === "desc"',
-    '(click)': 'rotate()'
-  }
+  // tslint:disable-next-line:directive-selector
+  selector: 'th[sortable]'
 })
 export class SortableDirective {
 
   @Input() sortable: SortColumn = '';
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
+  @HostBinding('class') class: string;
 
-  constructor() { }
-
+  @HostListener('click')
   rotate() {
     this.direction = rotate[this.direction];
+    this.class = this.direction;
     this.sort.emit({column: this.sortable, direction: this.direction});
   }
 }
