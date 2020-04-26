@@ -39,8 +39,8 @@ function sort(exchanges: Exchange[], column: SortColumn, direction: string): Exc
 
 function matches(exchange: Exchange, term: string) {
   return exchange.name.toLowerCase().includes(term.toLowerCase())
-    || exchange.address.toLowerCase().includes(term)
-    || exchange.description.toLowerCase().includes(term);
+    || exchange.address.toLowerCase().includes(term.toLowerCase())
+    || exchange.description.toLowerCase().includes(term.toLowerCase());
 }
 
 @Injectable({

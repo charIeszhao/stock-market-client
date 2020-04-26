@@ -42,8 +42,8 @@ function sort(companies: Company[], column: SortColumn, direction: string): Comp
 
 function matches(company: Company, term: string, pipe?: PipeTransform) {
   return company.name.toLowerCase().includes(term.toLowerCase())
-    || company.exchange.toLowerCase().includes(term)
-    || company.description.toLowerCase().includes(term);
+    || company.exchange.toLowerCase().includes(term.toLowerCase())
+    || company.description.toLowerCase().includes(term.toLowerCase());
 }
 
 @Injectable({
