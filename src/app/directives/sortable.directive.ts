@@ -1,7 +1,8 @@
 import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { Company } from '../services/company.service';
+import { Exchange } from '../services/exchange.service';
 
-export type SortColumn = keyof Company | '';
+export type SortColumn = keyof Company | keyof Exchange | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { asc: 'desc', desc: '', '': 'asc' };
 

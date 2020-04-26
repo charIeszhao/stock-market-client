@@ -57,8 +57,7 @@ export class CompanyService {
 
   getCompanies(searchTerm: string, column: SortColumn, direction: SortDirection, page: number, pageSize: number): Observable<ResponseData> {
     return this.http.get<Company[]>('/assets/mockup/getCompanies.json')
-      .pipe(
-        map((companies: Company[]) => {
+      .pipe(map((companies: Company[]) => {
             const total = companies.length;
             companies = sort(companies, column, direction);
             companies = companies.filter(country => matches(country, searchTerm));

@@ -3,6 +3,7 @@ import { Company, CompanyService, ResponseData, State } from '../../services/com
 import { SortableDirective, SortColumn, SortDirection, SortEvent } from '../../directives/sortable.directive';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-company-management',
@@ -20,6 +21,9 @@ export class CompanyManagementComponent implements OnInit {
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
 
+  editCompanyForm: FormGroup;
+  companyToDelete: Company;
+
   private state: State = {
     page: 1,
     pageSize: 6,
@@ -30,7 +34,8 @@ export class CompanyManagementComponent implements OnInit {
 
   constructor(
     private service: CompanyService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private fb: FormBuilder
   ) {
     this.getData();
   }
@@ -53,6 +58,14 @@ export class CompanyManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.editCompanyForm = this.fb.group({
+      name: [''],
+      exchange: [''],
+      ceoName: [''],
+      boardMembers: [''],
+      ipoDate: [''],
+      description: ['']
+    });
   }
 
   getData() {
@@ -75,16 +88,36 @@ export class CompanyManagementComponent implements OnInit {
     this.sortDirection = direction;
   }
 
-  onEdit(company: Company): void {
-  }
-
-  onDelete(companyId: number): void {
-    this.companies = this.companies.filter(company => company.id !== companyId);
-  }
-
-  raiseModal(content) {
-    this.modalService.open(content, {
+  raiseEditModal(template, company?: Company) {
+    this.modalService.open(template, {
       ariaLabelledBy: 'modal-basic-title',
     });
+    if (company) {
+      this.editCompanyForm.patchValue({
+        name: company.name,
+        exchange: company.exchange,
+        ceoName: company.ceoName,
+        boardMembers: company.boardMembers.join(', '),
+        ipoDate: company.ipoDate,
+        description: company.description
+      });
+    }
+  }
+
+  raiseDeleteModal(template, company: Company) {
+    this.companyToDelete = company;
+    this.modalService.open(template, {
+      ariaLabelledBy: 'modal-basic-title',
+    });
+  }
+
+  submitEdit(modal) {
+    modal.close();
+  }
+
+  submitDelete(modal) {
+    this.companies = this.companies.filter(company => company.id !== this.companyToDelete.id);
+    this.companyToDelete = null;
+    modal.close();
   }
 }

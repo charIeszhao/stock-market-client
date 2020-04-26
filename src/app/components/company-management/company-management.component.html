@@ -4,7 +4,7 @@
   <div class="form-group form-inline">
     Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"/>
     <span class="ml-3" *ngIf="isLoading">Loading...</span>
-    <button class="btn btn-outline-primary ml-auto" (click)="raiseModal(content)">New Company</button>
+    <button class="btn btn-outline-primary ml-auto" (click)="raiseEditModal(editModal)">New Company</button>
   </div>
   <table class="table table-striped">
     <thead>
@@ -23,8 +23,8 @@
       <td><ngb-highlight [result]="company.exchange" [term]="searchTerm"></ngb-highlight></td>
       <td><ngb-highlight [result]="company.description" [term]="searchTerm"></ngb-highlight></td>
       <td>
-        <fa-icon class="mx-1" [icon]="faEdit" (click)="onEdit(company)"></fa-icon>
-        <fa-icon class="mx-1" [icon]="faTrashAlt" (click)="onDelete(company.id)"></fa-icon>
+        <fa-icon class="mx-1" [icon]="faEdit" (click)="raiseEditModal(editModal, company)"></fa-icon>
+        <fa-icon class="mx-1" [icon]="faTrashAlt" (click)="raiseDeleteModal(deleteModal, company)"></fa-icon>
       </td>
     </tr>
     </tbody>
@@ -42,31 +42,43 @@
   </div>
 </form>
 
-<ng-template #content let-modal>
+<ng-template #editModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Add Company</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <form>
+  <div class="modal-body edit">
+    <form [formGroup]="editCompanyForm">
       <div class="form-group">
         <label for="name" class="col-form-label">Company Name</label>
         <div>
-          <input class="form-control" id="name">
+          <input class="form-control" id="name" formControlName="name">
         </div>
       </div>
       <div class="form-group">
-        <label for="ceoAndBoardMembers" class="col-form-label">CEO Name & Board Members</label>
+        <label for="exchange" class="col-form-label">Stock Exchange</label>
         <div>
-          <input class="form-control" id="ceoAndBoardMembers">
+          <input class="form-control" id="exchange" formControlName="exchange">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ceoName" class="col-form-label">CEO</label>
+        <div>
+          <input class="form-control" id="ceoName" formControlName="ceoName">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="boardMembers" class="col-form-label">Board Members</label>
+        <div>
+          <input class="form-control" id="boardMembers" formControlName="boardMembers">
         </div>
       </div>
       <div class="form-group">
         <label for="ipoDate" class="col-form-label">IPO Date</label>
         <div class="input-group">
-          <input id="ipoDate" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <input id="ipoDate" class="form-control" placeholder="yyyy-mm-dd" formControlName="ipoDate" ngbDatepicker #dp="ngbDatepicker">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
           </div>
@@ -75,12 +87,28 @@
       <div class="form-group">
         <label for="description" class="col-form-label">Description</label>
         <div>
-          <textarea class="form-control" id="description" rows="3"></textarea>
+          <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-primary" (click)="modal.close('Save click')">Save</button>
+    <button type="submit" class="btn btn-outline-primary" (click)="submitEdit(modal)">Save</button>
+  </div>
+</ng-template>
+
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Delete Company</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Are you sure you want to delete <span class="text-primary">"{{ companyToDelete.name }}"</span>?</strong></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">Cancel</button>
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="submitDelete(modal)">Delete</button>
   </div>
 </ng-template>

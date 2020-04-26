@@ -1,1 +1,93 @@
-<h4>Manage Exchange</h4>
+<h4 class="mb-3">Manage Exchange</h4>
+
+<form>
+  <div class="form-group form-inline">
+    Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"/>
+    <span class="ml-3" *ngIf="isLoading">Loading...</span>
+    <button class="btn btn-outline-primary ml-auto" (click)="raiseEditModal(editModal)">New Exchange</button>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Stock Exchange</th>
+      <th scope="col" sortable="exchange" (sort)="onSort($event)">Address</th>
+      <th scope="col" sortable="description" (sort)="onSort($event)">Description</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let exchange of exchanges; let i = index;">
+      <th scope="row">{{ (page - 1) * pageSize + i + 1 }}</th>
+      <td><ngb-highlight [result]="exchange.name" [term]="searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="exchange.address" [term]="searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="exchange.description" [term]="searchTerm"></ngb-highlight></td>
+      <td>
+        <fa-icon class="mx-1" [icon]="faEdit" (click)="raiseEditModal(editModal, exchange)"></fa-icon>
+        <fa-icon class="mx-1" [icon]="faTrashAlt" (click)="raiseDeleteModal(deleteModal, exchange)"></fa-icon>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="total" [(page)]="page" [pageSize]="pageSize">
+    </ngb-pagination>
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+      <option [ngValue]="8">8 items per page</option>
+    </select>
+  </div>
+</form>
+
+<ng-template #editModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Exchange</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body edit">
+    <form [formGroup]="editExchangeForm">
+      <div class="form-group">
+        <label for="name" class="col-form-label">Exchange Name</label>
+        <div>
+          <input class="form-control" id="name" formControlName="name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address" class="col-form-label">Address</label>
+        <div>
+          <input class="form-control" id="address" formControlName="address">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-form-label">Description</label>
+        <div>
+          <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-primary" (click)="submitEdit(modal)">Save</button>
+  </div>
+</ng-template>
+
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Delete Exchange</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Are you sure you want to delete <span class="text-primary">"{{ exchangeToDelete.name }}"</span>?</strong></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">Cancel</button>
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="submitDelete(modal)">Delete</button>
+  </div>
+</ng-template>

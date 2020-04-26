@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "BSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "address": "7031 Gulf Drive\nWilmington, MA 01887"
+  },
+  {
+    "id": 2,
+    "name": "NSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "address": "13 Bear Hill Avenue\nDeer Park, NY 11729"
+  },
+  {
+    "id": 3,
+    "name": "HSI",
+    "description": "Lorem ipsum dolor sit amet",
+    "address": "1 Country Street\nBarrington, IL 60010"
+  },
+  {
+    "id": 4,
+    "name": "NASDAQ",
+    "description": "Lorem ipsum dolor sit amet",
+    "address": "43 Randall Mill St.\nOcean Springs, MS 39564"
+  },
+  {
+    "id": 5,
+    "name": "DJI",
+    "description": "Lorem ipsum dolor sit amet",
+    "address": "674 East Laurel Lane\nHelena, MT 59601"
+  }
+]

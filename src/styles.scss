@@ -1,1 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
+
+.modal-body {
+  max-height: calc(100vh - 15rem);
+  overflow-y: auto;
+}
