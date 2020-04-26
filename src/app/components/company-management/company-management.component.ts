@@ -1,9 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Company, CompanyService, ResponseData, State } from '../../services/company.service';
 import { SortableDirective, SortColumn, SortDirection, SortEvent } from '../../directives/sortable.directive';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-company-management',
@@ -35,7 +36,7 @@ export class CompanyManagementComponent implements OnInit {
   constructor(
     private service: CompanyService,
     private modalService: NgbModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.getData();
   }
@@ -58,14 +59,7 @@ export class CompanyManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.editCompanyForm = this.fb.group({
-      name: [''],
-      exchange: [''],
-      ceoName: [''],
-      boardMembers: [''],
-      ipoDate: [''],
-      description: ['']
-    });
+    this.resetEditForm();
   }
 
   getData() {
@@ -88,17 +82,34 @@ export class CompanyManagementComponent implements OnInit {
     this.sortDirection = direction;
   }
 
+  resetEditForm() {
+    this.editCompanyForm = this.fb.group({
+      name: [''],
+      exchange: [''],
+      ceoName: [''],
+      boardMembers: [''],
+      ipoDate: [''],
+      description: ['']
+    });
+  }
+
   raiseEditModal(template, company?: Company) {
+    this.resetEditForm();
     this.modalService.open(template, {
       ariaLabelledBy: 'modal-basic-title',
     });
     if (company) {
+      const ipoDate = moment(company.ipoDate);
       this.editCompanyForm.patchValue({
         name: company.name,
         exchange: company.exchange,
         ceoName: company.ceoName,
         boardMembers: company.boardMembers.join(', '),
-        ipoDate: company.ipoDate,
+        ipoDate: {
+          year: Number(ipoDate.format('YYYY')),
+          month: Number(ipoDate.format('MM')),
+          day: Number(ipoDate.format('DD'))
+        },
         description: company.description
       });
     }

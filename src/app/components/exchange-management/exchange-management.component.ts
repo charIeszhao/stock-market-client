@@ -58,11 +58,7 @@ export class ExchangeManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.editExchangeForm = this.fb.group({
-      name: [''],
-      address: [''],
-      description: ['']
-    });
+    this.resetEditForm();
   }
 
   getData() {
@@ -85,7 +81,16 @@ export class ExchangeManagementComponent implements OnInit {
     this.sortDirection = direction;
   }
 
+  resetEditForm() {
+    this.editExchangeForm = this.fb.group({
+      name: [''],
+      address: [''],
+      description: ['']
+    });
+  }
+
   raiseEditModal(template, exchange?: Exchange) {
+    this.resetEditForm();
     this.modalService.open(template, {
       ariaLabelledBy: 'modal-basic-title',
     });
