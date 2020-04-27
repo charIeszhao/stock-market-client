@@ -1,10 +1,11 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Company, CompanyService, ResponseData, State } from '../../services/company.service';
+import { Company, CompanyService } from '../../services/company.service';
 import { SortableDirective, SortColumn, SortDirection, SortEvent } from '../../directives/sortable.directive';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+import { ResponseData, State } from '../../services/table.service';
 
 @Component({
   selector: 'app-company-management',
@@ -63,9 +64,8 @@ export class CompanyManagementComponent implements OnInit {
   }
 
   getData() {
-    const { searchTerm, sortColumn, sortDirection, page, pageSize } = this.state;
-    this.service.getCompanies(searchTerm, sortColumn, sortDirection, page, pageSize).subscribe((data: ResponseData) => {
-      this.companies = [... data.companies];
+    this.service.getCompanies(this.state).subscribe((data: ResponseData<Company>) => {
+      this.companies = [... data.entities];
       this.total = data.total;
       this.isLoading = false;
     });
