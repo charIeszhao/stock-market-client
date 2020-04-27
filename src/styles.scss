@@ -4,3 +4,16 @@
   max-height: calc(100vh - 15rem);
   overflow-y: auto;
 }
+
+.page-title {
+  position: -webkit-sticky;
+  position: sticky;
+  height: 3.5rem;
+  width: 100%;
+  line-height: 3.5rem;
+  font-size: 1.5rem;
+  top: 50px;
+  left: 240px;
+  background: white;
+  z-index: 100;
+}

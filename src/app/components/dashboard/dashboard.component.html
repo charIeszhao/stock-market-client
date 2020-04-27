@@ -1,1 +1,42 @@
-<p>dashboard works!</p>
+<div class="page-title">Stock Market & Sector Performance</div>
+
+<section>
+  <div echarts [options]="options" class="demo-chart"></div>
+</section>
+<section class="row">
+  <div class="col-md-8">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Company</th>
+        <th scope="col">Last Price (Change)</th>
+        <th scope="col">Prior Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of marketDataEntries">
+        <td>{{ data.companyName }}</td>
+        <td [innerHTML]="data.lastPrice | stockPriceChange: data.priorDatePrice"></td>
+        <td>{{ data.priorDatePrice }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Sector</th>
+        <th scope="col">Change %</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of sectorDataEntries">
+        <td>{{ data.sectorName }}</td>
+        <td><span [ngStyle]="{color: data.changePct > 0 ? 'red' : '#00CC00'}">{{ data.changePct }}%</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
