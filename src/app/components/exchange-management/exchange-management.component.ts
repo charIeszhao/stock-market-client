@@ -1,9 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Exchange, ExchangeService, ResponseData, State } from '../../services/exchange.service';
+import { Exchange, ExchangeService } from '../../services/exchange.service';
 import { SortableDirective, SortColumn, SortDirection, SortEvent } from '../../directives/sortable.directive';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ResponseData, State } from '../../services/table.service';
 
 @Component({
   selector: 'app-exchange-management',
@@ -62,9 +63,8 @@ export class ExchangeManagementComponent implements OnInit {
   }
 
   getData() {
-    const { searchTerm, sortColumn, sortDirection, page, pageSize } = this.state;
-    this.service.getExchanges(searchTerm, sortColumn, sortDirection, page, pageSize).subscribe((data: ResponseData) => {
-      this.exchanges = [... data.exchanges];
+    this.service.getExchanges(this.state).subscribe((data: ResponseData<Exchange>) => {
+      this.exchanges = [... data.entities];
       this.total = data.total;
       this.isLoading = false;
     });
