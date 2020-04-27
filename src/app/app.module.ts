@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 import { TokenInterceptor } from './core/auth/token.interceptor';
 
 import { AppComponent } from './app.component';
@@ -25,6 +27,7 @@ import { CompareChartsComponent } from './components/compare-charts/compare-char
 
 import { SortableDirective } from './directives/sortable.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StockPriceChangePipe } from './pipes/stock-price-change.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DashboardComponent,
     IpoCalendarComponent,
     CompareChartsComponent,
-    SortableDirective
+    SortableDirective,
+    StockPriceChangePipe
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxEchartsModule
   ],
   providers: [
     {
