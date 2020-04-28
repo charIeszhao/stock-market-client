@@ -8,6 +8,7 @@ export type MenuDropDown = {
   label: string;
   routerLink?: string;
   fn?: () => void;
+  separator?: boolean;
 };
 
 @Component({
@@ -35,8 +36,8 @@ export class HeaderComponent implements OnInit {
       this.dropDownItems = [
         {label: 'Edit Profile', routerLink: '/'},
         {label: 'Preferences', routerLink: '/'},
-        ... isAdmin ? [{label: `Go to ${this.isInAdminView ? 'User' : 'Admin'} View`, fn: this.toggleUserViews}] : [],
-        {label: 'Logout', fn: this.logout}
+        ... isAdmin ? [{label: `Go to ${this.isInAdminView ? 'User' : 'Admin'} View`, fn: this.toggleUserViews, separator: true}] : [],
+        {label: 'Logout', fn: this.logout, separator: true}
       ];
     });
   }
