@@ -45,12 +45,8 @@ export class LoginComponent implements OnInit {
     //
       sessionStorage.setItem('email', this.loginForm.value.email);
 
-      if (this.loginForm.value.email === 'admin@stockmarket.com') {
-        this.router.navigate(['/admin']);
-      } else {
-        // Navigate to home page
-        this.router.navigate(['/']);
-      }
+      // Navigate to home page
+      this.router.navigate(['/']);
 
     //
     //   }, error => { });
