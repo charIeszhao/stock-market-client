@@ -1,0 +1,11 @@
+.chart, .settings {
+  height: calc(100vh - 8rem);
+  border: 1px solid #CDCDCD;
+}
+
+.chart {
+}
+
+.settings {
+  overflow-y: auto;
+}

@@ -1,1 +1,42 @@
-<div class="page-title">ipo-calendar works!</div>
+<div class="page-title">Upcoming IPOs To Watch</div>
+
+<form>
+  <div class="form-group form-inline">
+    Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"/>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Company Name</th>
+      <th scope="col" sortable="ipoDate" (sort)="onSort($event)">IPO Date</th>
+      <th scope="col" sortable="exchange" (sort)="onSort($event)">Exchange</th>
+      <th scope="col" sortable="description" (sort)="onSort($event)">Description</th>
+      <th scope="col" sortable="priceRange" (sort)="onSort($event)">Price Range</th>
+      <th scope="col" sortable="shares" (sort)="onSort($event)">Shares</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ipo of ipoList; let i = index;">
+      <th scope="row">{{ (page - 1) * pageSize + i + 1 }}</th>
+      <td><ngb-highlight [result]="ipo.name" [term]="searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="ipo.ipoDate" [term]="searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="ipo.exchange" [term]="searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="ipo.description" [term]="searchTerm"></ngb-highlight></td>
+      <td>$<ngb-highlight [result]="ipo.minPrice" [term]="searchTerm"></ngb-highlight> - $<ngb-highlight [result]="ipo.maxPrice" [term]="searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="ipo.shares | number" [term]="searchTerm"></ngb-highlight></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="total" [(page)]="page" [pageSize]="pageSize">
+    </ngb-pagination>
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+      <option [ngValue]="8">8 items per page</option>
+    </select>
+  </div>
+</form>

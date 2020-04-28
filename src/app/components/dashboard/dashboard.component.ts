@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EChartOption } from 'echarts';
 
 export type MarketData = {
   companyName: string;
@@ -18,7 +19,7 @@ export type SectorData = {
 })
 export class DashboardComponent implements OnInit {
 
-  options: any;
+  options: EChartOption;
   marketDataEntries: MarketData[];
   sectorDataEntries: SectorData[];
 
@@ -45,8 +46,8 @@ export class DashboardComponent implements OnInit {
     const data1 = [];
     const data2 = [];
 
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
+    for (let i = 0; i < 50; i++) {
+      xAxisData.push('Week' + i);
       data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
       data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
     }
@@ -54,27 +55,31 @@ export class DashboardComponent implements OnInit {
     this.options = {
       legend: {
         data: ['Company 1', 'Company 2'],
-        align: 'left'
+        bottom: 5,
       },
       tooltip: {},
       xAxis: {
         data: xAxisData,
-        silent: false,
         splitLine: {
           show: false
         }
       },
       yAxis: {
+        name: 'Stock Price',
+        nameTextStyle: {
+          fontSize: 18,
+          fontWeight: 'bold'
+        }
       },
       series: [{
-        name: 'bar',
+        name: 'Company 1',
         type: 'bar',
         data: data1,
         animationDelay(idx) {
           return idx * 10;
         }
       }, {
-        name: 'bar2',
+        name: 'Company 2',
         type: 'bar',
         data: data2,
         animationDelay(idx) {
