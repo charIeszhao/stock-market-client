@@ -1,1 +1,140 @@
 <div class="page-title">Update Upcoming IPOs</div>
+
+<form>
+  <div class="form-group form-inline">
+    Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"/>
+    <button class="btn btn-outline-primary ml-auto" (click)="raiseEditModal(editModal)">New IPO</button>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Company Name</th>
+      <th scope="col" sortable="ipoDate" (sort)="onSort($event)">IPO Date</th>
+      <th scope="col" sortable="exchange" (sort)="onSort($event)">Exchange</th>
+      <th scope="col" sortable="description" (sort)="onSort($event)">Description</th>
+      <th scope="col" sortable="priceRange" (sort)="onSort($event)">Price Range</th>
+      <th scope="col" sortable="shares" (sort)="onSort($event)">Shares</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ipo of ipoList; let i = index;">
+      <th scope="row">{{ (page - 1) * pageSize + i + 1 }}</th>
+      <td>
+        <ngb-highlight [result]="ipo.name" [term]="searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="ipo.ipoDate" [term]="searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="ipo.exchange" [term]="searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="ipo.description" [term]="searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        $<ngb-highlight [result]="ipo.minPrice" [term]="searchTerm"></ngb-highlight> -
+        $<ngb-highlight [result]="ipo.maxPrice" [term]="searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="ipo.shares | number" [term]="searchTerm"></ngb-highlight>
+      </td>
+      <td>
+        <fa-icon class="mx-1" [icon]="faEdit" (click)="raiseEditModal(editModal, ipo)"></fa-icon>
+        <fa-icon class="mx-1" [icon]="faTrashAlt" (click)="raiseDeleteModal(deleteModal, ipo)"></fa-icon>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="total" [(page)]="page" [pageSize]="pageSize">
+    </ngb-pagination>
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+      <option [ngValue]="8">8 items per page</option>
+    </select>
+  </div>
+</form>
+
+<ng-template #editModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add IPO</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body edit">
+    <form [formGroup]="editIpoForm">
+      <div class="form-group">
+        <label for="name" class="col-form-label">Company Name</label>
+        <div>
+          <input class="form-control" id="name" formControlName="name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exchange" class="col-form-label">Stock Exchange</label>
+        <div>
+          <input class="form-control" id="exchange" formControlName="exchange">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ipoDate" class="col-form-label">IPO Date</label>
+        <div class="input-group">
+          <input id="ipoDate" class="form-control" placeholder="yyyy-mm-dd" formControlName="ipoDate" ngbDatepicker
+                 #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-form-label">Description</label>
+        <div>
+          <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="minPrice" class="col-form-label">Minimum Price</label>
+        <div>
+          <input class="form-control" id="minPrice" formControlName="minPrice">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="maxPrice" class="col-form-label">Maximum Range</label>
+        <div>
+          <input class="form-control" id="maxPrice" formControlName="maxPrice">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="shares" class="col-form-label">Shares</label>
+        <div>
+          <input class="form-control" id="shares" formControlName="shares">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-primary" (click)="submitEdit(modal)">Save</button>
+  </div>
+</ng-template>
+
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Delete IPO</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+            (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Are you sure you want to delete?</strong></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">Cancel</button>
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="submitDelete(modal)">Delete</button>
+  </div>
+</ng-template>
