@@ -8,4 +8,13 @@
 
 .settings {
   overflow-y: auto;
+
+  .legend-label {
+    position: absolute;
+    top: -0.825rem;
+    left: 2rem;
+    padding: 0 0.5rem;
+    background-color: white;
+    z-index: 500;
+  }
 }
