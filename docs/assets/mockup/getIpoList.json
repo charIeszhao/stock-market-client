@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "name": "Company 1",
+    "exchange": "BSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 5,
+    "maxPrice": 8,
+    "shares": 2000000,
+    "ipoDate": "2020-05-01"
+  },
+  {
+    "id": 2,
+    "name": "Company 2",
+    "exchange": "NSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 7.5,
+    "maxPrice": 10,
+    "shares": 4200000,
+    "ipoDate": "2020-05-10"
+  },
+  {
+    "id": 3,
+    "name": "Company 3",
+    "exchange": "HSI",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 15,
+    "maxPrice": 20,
+    "shares": 8500000,
+    "ipoDate": "2020-05-20"
+  },
+  {
+    "id": 4,
+    "name": "Company 4",
+    "exchange": "NASDAQ",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 10,
+    "maxPrice": 12,
+    "shares": 32000000,
+    "ipoDate": "2020-06-01"
+  },
+  {
+    "id": 5,
+    "name": "Company 5",
+    "exchange": "DJI",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 4,
+    "maxPrice": 6,
+    "shares": 4000000,
+    "ipoDate": "2020-06-10"
+  },
+  {
+    "id": 6,
+    "name": "Company 6",
+    "exchange": "BSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 5.5,
+    "maxPrice": 8,
+    "shares": 2300000,
+    "ipoDate": "2020-06-20"
+  },
+  {
+    "id": 7,
+    "name": "Company 7",
+    "exchange": "NSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 20,
+    "maxPrice": 30,
+    "shares": 1500000,
+    "ipoDate": "2020-06-30"
+  },
+  {
+    "id": 8,
+    "name": "Company 8",
+    "exchange": "HSI",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 9.5,
+    "maxPrice": 12,
+    "shares": 800000,
+    "ipoDate": "2020-07-01"
+  },
+  {
+    "id": 9,
+    "name": "Company 9",
+    "exchange": "NASDAQ",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 10,
+    "maxPrice": 12,
+    "shares": 7500000,
+    "ipoDate": "2020-07-10"
+  },
+  {
+    "id": 10,
+    "name": "Company 10",
+    "exchange": "DJI",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 5,
+    "maxPrice": 8,
+    "shares": 8000000,
+    "ipoDate": "2020-07-20"
+  },
+  {
+    "id": 11,
+    "name": "Company 11",
+    "exchange": "BSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 3,
+    "maxPrice": 8,
+    "shares": 21000000,
+    "ipoDate": "2020-07-30"
+  },
+  {
+    "id": 12,
+    "name": "Company 12",
+    "exchange": "NSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 5,
+    "maxPrice": 12,
+    "shares": 5600000,
+    "ipoDate": "2020-09-21"
+  },
+  {
+    "id": 13,
+    "name": "Company 13",
+    "exchange": "HSI",
+    "description": "Lorem ipsum dolor sit amet",
+    "minPrice": 10,
+    "maxPrice": 14,
+    "shares": 8000000,
+    "ipoDate": "2020-10-01"
+  }
+]

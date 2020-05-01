@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "name": "Company 1",
+    "exchange": "BSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 2,
+    "name": "Company 2",
+    "exchange": "NSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 3,
+    "name": "Company 3",
+    "exchange": "HSI",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 4,
+    "name": "Company 4",
+    "exchange": "NASDAQ",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 5,
+    "name": "Company 5",
+    "exchange": "DJI",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 6,
+    "name": "Company 6",
+    "exchange": "BSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 7,
+    "name": "Company 7",
+    "exchange": "NSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 8,
+    "name": "Company 8",
+    "exchange": "HSI",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 9,
+    "name": "Company 9",
+    "exchange": "NASDAQ",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 10,
+    "name": "Company 10",
+    "exchange": "DJI",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 11,
+    "name": "Company 11",
+    "exchange": "BSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 12,
+    "name": "Company 12",
+    "exchange": "NSE",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  },
+  {
+    "id": 13,
+    "name": "Company 13",
+    "exchange": "HSI",
+    "description": "Lorem ipsum dolor sit amet",
+    "ceoName": "John Doe",
+    "boardMembers": ["John Doe", "Jane Smith", "Michael Johnson, Charles Lee"],
+    "ipoDate": "2016-01-01"
+  }
+]
