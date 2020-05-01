@@ -10,7 +10,7 @@
     </div>
     <div ngbDropdownMenu>
       <button ngbDropdownItem *ngFor="let item of dropDownItems"
-              [ngStyle]="{'border-top': item.separator ? '1px solid #ced4da' : ''}"
+              [style.border-top]="item.separator ? '1px solid #ced4da' : ''"
               (click)="onMenuClick(item)">{{ item.label }}
       </button>
     </div>
