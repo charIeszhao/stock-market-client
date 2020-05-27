@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { StockPriceService } from '../../services/stock-price.service';
 
 @Component({
   selector: 'app-data-import',
@@ -14,7 +15,7 @@ export class DataImportComponent implements OnInit {
   fileToUpload: File = null;
   isUploaded = false;
 
-  constructor() {
+  constructor(private priceService: StockPriceService) {
     this.formImport = new FormGroup({
       importFile: new FormControl('', Validators.required)
     });
@@ -30,6 +31,16 @@ export class DataImportComponent implements OnInit {
   }
 
   import(): void {
-    this.isUploaded = true;
+
+    const formData = new FormData();
+    if (this.fileToUpload) {
+      this.isUploaded = true;
+      formData.append('file', this.fileToUpload);
+
+      this.priceService.importExcel(formData).subscribe(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
+    }
   }
 }

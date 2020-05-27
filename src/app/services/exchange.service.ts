@@ -23,7 +23,7 @@ export class ExchangeService extends TableService {
   }
 
   getExchanges(state: State): Observable<ResponseData<Exchange>> {
-    return this.http.get<Exchange[]>('/assets/mockup/getStockExchanges.json')
+    return this.http.get<Exchange[]>('/exchange')
       .pipe(map((entities: Exchange[]) => this.pipeline(entities, state)));
   }
 

@@ -20,13 +20,11 @@ export class AuthService {
   ) { }
 
   isAuthenticated(): boolean {
-    // const isTokenExpired = this.jwtService.isTokenExpired(getAccessToken());
-    // if (isTokenExpired && this.router.url !== '/login') {
-    //   this.logout();
-    // }
-    // return !isTokenExpired;
-
-    return !!sessionStorage.getItem('email');
+    const isTokenExpired = this.jwtService.isTokenExpired(getAccessToken());
+    if (isTokenExpired && this.router.url !== '/login') {
+      this.logout();
+    }
+    return !isTokenExpired;
   }
 
   login(user: User) {
@@ -35,38 +33,17 @@ export class AuthService {
 
   logout() {
     sessionStorage.removeItem('token');
-    sessionStorage.removeItem('email');
     this.router.navigate(['/login']);
   }
 
-  // getUser(): Promise<User> {
-  //   return new Promise<User>((resolve, reject) => {
-  //     this.http.get('/User').subscribe((UserRes: User) => {
-  //       resolve(UserRes);
-  //     },
-  //     error => {
-  //       reject(error);
-  //     });
-  //   });
-  // }
-
   getUser(): Promise<User> {
-    const email = sessionStorage.getItem('email');
-    let user: User;
-    if (email === 'admin@stockmarket.com') {
-      user = {
-        id: '1',
-        email,
-        role: 'admin'
-      };
-    } else {
-      user = {
-        email,
-        role: 'user'
-      };
-    }
-    return new Promise<User>(resolve => {
-      resolve(user);
+    return new Promise<User>((resolve, reject) => {
+      this.http.get(`/user/info`).subscribe((userRes: any) => {
+        resolve(userRes.data);
+      },
+      error => {
+        reject(error);
+      });
     });
   }
 }

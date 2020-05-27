@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/auth/auth.service';
 import { Router } from '@angular/router';
+import { ResponseEntity } from '../../models/response-entity';
+
+interface LoginData {
+  token: string;
+  userId: number;
+  role: string;
+  email: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -33,23 +41,23 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.loginForm.valid) {
-    //   this.authService.login({
-    //     email: this.loginForm.value.email,
-    //     password: this.loginForm.value.password
-    //   }).subscribe(loginRes => {
-    //     // Set token first
-    //     sessionStorage.setItem('token', loginRes.data.token);
-    //
-    //     // Then get extra user information
-    //     this.authService.getUser();
-    //
-      sessionStorage.setItem('email', this.loginForm.value.email);
+      this.authService.login({
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      }).subscribe((loginRes: ResponseEntity<LoginData>) => {
+        // Set token first
+        sessionStorage.setItem('token', loginRes.data.token);
 
-      // Navigate to home page
-      this.router.navigate(['/']);
+        // Then get extra user information
+        this.authService.getUser();
+
+        // Navigate to home page
+        this.router.navigate(['/']);
 
     //
-    //   }, error => { });
+      }, error => {
+        this.loginForm.get('email').setErrors(Validators.nullValidator);
+      });
     }
   }
 

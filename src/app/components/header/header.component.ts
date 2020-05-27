@@ -31,15 +31,17 @@ export class HeaderComponent implements OnInit {
     this.isInAdminView = url.indexOf('admin/') > -1;
     this.isAuthenticated = this.authService.isAuthenticated();
 
-    this.authService.getUser().then((user: User) => {
-      const isAdmin = user.role === 'admin';
-      this.dropDownItems = [
-        {label: 'Edit Profile', routerLink: '/'},
-        {label: 'Preferences', routerLink: '/'},
-        ... isAdmin ? [{label: `Go to ${this.isInAdminView ? 'User' : 'Admin'} View`, fn: this.toggleUserViews, separator: true}] : [],
-        {label: 'Logout', fn: this.logout, separator: true}
-      ];
-    });
+    if (this.isAuthenticated) {
+      this.authService.getUser().then((user: User) => {
+        const isAdmin = user.role === 'ADMIN';
+        this.dropDownItems = [
+          {label: 'Edit Profile', routerLink: '/'},
+          {label: 'Preferences', routerLink: '/'},
+          ... isAdmin ? [{label: `Go to ${this.isInAdminView ? 'User' : 'Admin'} View`, fn: this.toggleUserViews, separator: true}] : [],
+          {label: 'Logout', fn: this.logout, separator: true}
+        ];
+      });
+    }
   }
 
   ngOnInit(): void {
