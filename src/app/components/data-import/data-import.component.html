@@ -11,11 +11,16 @@
     </div>
   </div>
 </form>
-<div *ngIf="!isUploaded" class="sample-download-link">
+<div *ngIf="!isUploaded && !isLoading" class="sample-download-link">
   <a href="https://github.com/vskreddy652/Genc_BatchB/blob/master/StockExchange_CaseStudy/sample_stock_data.xlsx">
     Click here to download sample Excel file
   </a>
+  <p>* Please note: Date time is by default using UTC timezone.</p>
 </div>
-<div *ngIf="isUploaded" class="import-success-info">
-  Data imported successfully!
+<div *ngIf="isLoading">
+  <fa-icon class="mx-1" [icon]="faSpinner" [spin]="true"></fa-icon>
+  Importing, please wait...
+</div>
+<div *ngIf="!isLoading && isUploaded" class="import-success-info">
+  {{ totalImported }} records are imported successfully!
 </div>
