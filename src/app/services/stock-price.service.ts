@@ -12,8 +12,12 @@ export class StockPriceService {
 
   constructor(private http: HttpClient) { }
 
-  getPrices(): Observable<ResponseData<any>> {
-    return this.http.get<any>('/price');
+  getPricesByDateRange(from: string, to: string): Observable<ResponseData<any>> {
+    return this.http.get<any>(`/price?from=${from}&to=${to}`);
+  }
+
+  getPricesByDate(date: string): Observable<ResponseData<any>> {
+    return this.http.get<any>(`/price/${date}`);
   }
 
   importExcel(data): Observable<any> {

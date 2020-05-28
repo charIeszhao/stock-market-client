@@ -45,12 +45,10 @@ export abstract class TableService {
     }
   }
 
-  protected pipeline<T>(entities: T[], state: State): ResponseData<T> {
-    const { searchTerm, sortColumn, sortDirection, page, pageSize } = state;
-    const total = entities.length;
+  protected pipeline<T>(entities: T[], total: number, state: State): ResponseData<T> {
+    const { searchTerm, sortColumn, sortDirection } = state;
     entities = this.sort(entities, sortColumn, sortDirection);
     entities = entities.filter(entity => this.matches(entity, searchTerm));
-    entities = entities.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return { entities, total };
   }
 }

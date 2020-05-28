@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Entity, ResponseData, State, TableService } from './table.service';
+import { PageableResponse } from '../models/pageable-response';
 
 export interface Company extends Entity {
   id: number;
@@ -26,19 +27,21 @@ export class CompanyService extends TableService {
   }
 
   getCompanies(state: State): Observable<ResponseData<Company>> {
-    return this.http.get<Company[]>('/assets/mockup/getCompanies.json')
-      .pipe(map((entities: Company[]) => this.pipeline(entities, state)));
+    return this.http.get<PageableResponse<Company>>(`/company?page=${state.page - 1}&pageSize=${state.pageSize}`)
+      .pipe(
+        map(res => this.pipeline(res.content, res.totalElements, state))
+      );
   }
 
   addCompany(data: Company) {
-    return this.http.post('company', data);
+    return this.http.post('/company', data);
   }
 
   editCompany(id: number, data: Company) {
-    return this.http.put(`company/${id}`, data);
+    return this.http.put(`/company/${id}`, data);
   }
 
   deleteCompany(id: number) {
-    return this.http.delete(`company/${id}`);
+    return this.http.delete(`/company/${id}`);
   }
 }

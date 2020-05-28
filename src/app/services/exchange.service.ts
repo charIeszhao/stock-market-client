@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Entity, ResponseData, State, TableService } from './table.service';
+import { PageableResponse } from '../models/pageable-response';
 
 export interface Exchange extends Entity {
   id: number;
@@ -23,19 +24,21 @@ export class ExchangeService extends TableService {
   }
 
   getExchanges(state: State): Observable<ResponseData<Exchange>> {
-    return this.http.get<Exchange[]>('/exchange')
-      .pipe(map((entities: Exchange[]) => this.pipeline(entities, state)));
+    return this.http.get<PageableResponse<Exchange>>(`/exchange?page=${state.page - 1}&pageSize=${state.pageSize}`)
+      .pipe(
+        map(res => this.pipeline(res.content, res.totalElements, state))
+      );
   }
 
   addExchange(data: Exchange) {
-    return this.http.post('exchange', data);
+    return this.http.post('/exchange', data);
   }
 
   editExchange(id: number, data: Exchange) {
-    return this.http.put(`exchange/${id}`, data);
+    return this.http.put(`/exchange/${id}`, data);
   }
 
   deleteExchange(id: number) {
-    return this.http.delete(`exchange/${id}`);
+    return this.http.delete(`/exchange/${id}`);
   }
 }
