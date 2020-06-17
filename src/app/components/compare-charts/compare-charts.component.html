@@ -7,6 +7,47 @@
   <div class="col-md-4">
     <div class="settings">
       <div class="legend-label">Settings</div>
+      <form [formGroup]="compareForm">
+        <div class="form-group">
+          <label for="company" class="col-form-label">Company Name</label>
+          <div>
+            <select id="company" class="custom-select" formControlName="sourceCompanyId" (change)="onSelectSourceCompany($event)">
+              <option value="">Please select...</option>
+              <option *ngFor="let option of sourceDropDownData" [value]="option.id">{{ option.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="startDate" class="col-form-label">Start Date</label>
+          <div class="input-group">
+            <input id="startDate" class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
+                   ngbDatepicker #startDp="ngbDatepicker" (closed)="onChange()">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="startDp.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="endDate" class="col-form-label">End Date</label>
+          <div class="input-group">
+            <input id="endDate" class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate"
+                   ngbDatepicker #endDp="ngbDatepicker" (closed)="onChange()">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="endDp.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <div class="separator"></div>
+        <div class="form-group">
+          <label for="compareTarget" class="col-form-label">Compare to</label>
+          <div>
+            <select id="compareTarget" class="custom-select" formControlName="targetCompanyId" (change)="onSelectTargetCompany()">
+              <option value="">Please select...</option>
+              <option *ngFor="let option of targetDropDownData" [value]="option.id">{{ option.name }}</option>
+            </select>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </section>

@@ -66,6 +66,10 @@ const routes: Routes = [
       {
         path: 'compare',
         component: CompareChartsComponent
+      },
+      {
+        path: 'compare/:id',
+        component: CompareChartsComponent
       }
     ]
   },

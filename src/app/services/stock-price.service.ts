@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ResponseData, State } from './table.service';
+import { Entity, ResponseData, State } from './table.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { IPO } from './ipo.service';
+import { Company } from './company.service';
+import { MarketData, SectorData } from '../components/dashboard/dashboard.component';
+
+export interface Price extends Entity {
+  id: number;
+  dateTime: string;
+  price: number;
+  company: Company;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +19,24 @@ export class StockPriceService {
 
   constructor(private http: HttpClient) { }
 
-  getPricesByDateRange(from: string, to: string): Observable<ResponseData<any>> {
-    return this.http.get<any>(`/price?from=${from}&to=${to}`);
+  getPricesByCompanyId(companyId: string, from?: string, to?: string): Observable<Price[]> {
+    if (from && to) {
+      return this.http.get<Price[]>(`/price/${companyId}/${from}/${to}`);
+    } else {
+      return this.http.get<Price[]>(`/price/${companyId}`);
+    }
   }
 
-  getPricesByDate(date: string): Observable<ResponseData<any>> {
-    return this.http.get<any>(`/price/${date}`);
+  getPriceHistory(companyId: string): Observable<MarketData> {
+    return this.http.get<MarketData>(`/price/${companyId}/history`);
+  }
+
+  getPricesByDate(companyId: string, date: string): Observable<Price[]> {
+    return this.http.get<Price[]>(`/price/${companyId}/${date}`);
+  }
+
+  getSectorPrices(): Observable<SectorData[]> {
+    return this.http.get<SectorData[]>('/price/sectorPrices');
   }
 
   importExcel(data): Observable<any> {

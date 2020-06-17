@@ -3,6 +3,7 @@ import { Entity, ResponseData, State, TableService } from './table.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PageableResponse } from '../models/pageable-response';
 
 export interface IPO extends Entity {
   id: number;
@@ -27,7 +28,7 @@ export class IpoService extends TableService {
   }
 
   getIpoList(state: State): Observable<ResponseData<IPO>> {
-    return this.http.get<IPO[]>('/assets/mockup/getIpoList.json')
-      .pipe(map((entities: IPO[]) => this.pipeline(entities, state)));
+    return this.http.get<PageableResponse<IPO>>(`/ipo?page=${state.page - 1}&pageSize=${state.pageSize}`)
+      .pipe(map(res => this.pipeline(res.content, res.totalElements, state)));
   }
 }

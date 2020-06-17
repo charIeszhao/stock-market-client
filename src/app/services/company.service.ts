@@ -26,11 +26,15 @@ export class CompanyService extends TableService {
     super();
   }
 
-  getCompanies(state: State): Observable<ResponseData<Company>> {
+  getCompanies(state?: State): Observable<ResponseData<Company>> {
     return this.http.get<PageableResponse<Company>>(`/company?page=${state.page - 1}&pageSize=${state.pageSize}`)
       .pipe(
         map(res => this.pipeline(res.content, res.totalElements, state))
       );
+  }
+
+  getAllCompanies(): Observable<Company[]> {
+    return this.http.get<Company[]>(`/company/all`);
   }
 
   addCompany(data: Company) {
